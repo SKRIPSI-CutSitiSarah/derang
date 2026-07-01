@@ -1,4 +1,21 @@
 import type { Category } from "./category"
+import type { ExamType } from "./ml-client"
+
+// Mirrors the `analyses` table (PRD.md §10).
+export type AnalysisRow = {
+  id: string
+  user_id: string | null
+  created_at: string
+  title: string | null
+  exam_type: ExamType
+  source_filename: string | null
+  storage_path: string | null
+  participant_count: number | null
+  question_count: number | null
+  k_value: number | null
+  silhouette_score: number | null
+  status: "processing" | "done" | "failed"
+}
 
 // Mirrors the `participants` table (PRD.md §10).
 export type ParticipantRow = {

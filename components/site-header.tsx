@@ -1,18 +1,32 @@
 "use client"
 
+import { Fragment } from "react"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Separator } from "@/components/ui/separator"
 import { SidebarTrigger } from "@/components/ui/sidebar"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 
-function titleForPathname(pathname: string): string {
-  if (pathname === "/") return "Dashboard / Riwayat"
-  if (pathname === "/analyses/new") return "Analisis Baru"
-  if (pathname.startsWith("/analyses/")) return "Hasil Analisis"
-  return "ExamGuard"
+function crumbsForPathname(pathname: string): { label: string; href: string }[] {
+  const dashboard = { label: "Dashboard / Riwayat", href: "/" }
+
+  if (pathname === "/") return [dashboard]
+  if (pathname === "/analyses/new") return [dashboard, { label: "Analisis Baru", href: pathname }]
+  if (pathname.startsWith("/analyses/")) return [dashboard, { label: "Hasil Analisis", href: pathname }]
+
+  return [dashboard]
 }
 
 export function SiteHeader() {
   const pathname = usePathname()
+  const crumbs = crumbsForPathname(pathname)
 
   return (
     <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
@@ -22,7 +36,29 @@ export function SiteHeader() {
           orientation="vertical"
           className="mx-2 data-[orientation=vertical]:h-4"
         />
-        <h1 className="text-base font-medium">{titleForPathname(pathname)}</h1>
+        <Breadcrumb>
+          <BreadcrumbList>
+            {crumbs.map((crumb, index) => {
+              const isLast = index === crumbs.length - 1
+              return (
+                <Fragment key={crumb.href}>
+                  <BreadcrumbItem>
+                    {isLast ? (
+                      <BreadcrumbPage className="text-base font-medium text-foreground">
+                        {crumb.label}
+                      </BreadcrumbPage>
+                    ) : (
+                      <BreadcrumbLink asChild>
+                        <Link href={crumb.href}>{crumb.label}</Link>
+                      </BreadcrumbLink>
+                    )}
+                  </BreadcrumbItem>
+                  {!isLast && <BreadcrumbSeparator />}
+                </Fragment>
+              )
+            })}
+          </BreadcrumbList>
+        </Breadcrumb>
       </div>
     </header>
   )
