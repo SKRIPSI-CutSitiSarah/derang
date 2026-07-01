@@ -31,17 +31,17 @@ Kondisi awal repo: proyek Next.js 15 masih berupa **template dashboard shadcn/ui
 
 **Tujuan:** admin bisa menjalankan analisis end-to-end dari UI, terlepas dari apakah ML service asli atau mock yang menjawab di baliknya.
 
-- [ ] Buat modul klien `lib/ml-client.ts`: fungsi `validateDataset()` dan `analyzeDataset()` yang memanggil `ML_SERVICE_URL` sesuai kontrak §11 PRD (request/response persis seperti contoh JSON di PRD).
-- [ ] Buat mock service sementara (route handler Next.js atau fixture statis) yang mengembalikan bentuk respons `/validate` & `/analyze` sesuai §11, dipakai selama Flask asli belum tersedia.
-- [ ] Halaman `/analyses/new` (F-03, F-04): Tabs pilih mode Online/Offline, Dropzone unggah CSV/Excel.
-- [ ] Upload file mentah ke Supabase Storage (`datasets/{analysis_id}/{filename}`).
-- [ ] Panggil `validateDataset()` untuk cek kolom sebelum lanjut (F-05); tampilkan pesan error jelas bila gagal.
-- [ ] (Opsional UI) Form column mapping (F-06) & input/upload kunci jawaban (F-07), preview data hasil parsing.
-- [ ] Tombol "Jalankan Analisis" → Server Action Next.js memanggil `analyzeDataset()`.
-- [ ] Simpan hasil response (`analyses`, `participants`, `similarity_pairs`) ke Supabase Postgres — Next.js sebagai pemilik persistensi (§5 PRD).
-- [ ] Tangani status `processing` / `failed` (keandalan §13): timeout, retry, tampilkan error tanpa crash UI.
-- [ ] Loading state selama proses (Skeleton, Progress, Toast/Sonner).
-- [ ] Redirect ke `/analyses/[id]` setelah analisis selesai.
+- [x] Buat modul klien `lib/ml-client.ts`: fungsi `validateDataset()` dan `analyzeDataset()` yang memanggil `ML_SERVICE_URL` sesuai kontrak §11 PRD (request/response persis seperti contoh JSON di PRD).
+- [x] Buat mock service sementara (route handler Next.js atau fixture statis) yang mengembalikan bentuk respons `/validate` & `/analyze` sesuai §11, dipakai selama Flask asli belum tersedia.
+- [x] Halaman `/analyses/new` (F-03, F-04): Tabs pilih mode Online/Offline, Dropzone unggah CSV/Excel.
+- [x] Upload file mentah ke Supabase Storage (`datasets/{analysis_id}/{filename}`).
+- [x] Panggil `validateDataset()` untuk cek kolom sebelum lanjut (F-05); tampilkan pesan error jelas bila gagal.
+- [ ] (Opsional UI) Form column mapping (F-06) & input/upload kunci jawaban (F-07), preview data hasil parsing. *(digeser ke milestone berikutnya, P1 opsional sesuai catatan lintas milestone)*
+- [x] Tombol "Jalankan Analisis" → Server Action Next.js memanggil `analyzeDataset()`.
+- [x] Simpan hasil response (`analyses`, `participants`, `similarity_pairs`) ke Supabase Postgres — Next.js sebagai pemilik persistensi (§5 PRD).
+- [x] Tangani status `processing` / `failed` (keandalan §13): timeout, retry, tampilkan error tanpa crash UI.
+- [x] Loading state selama proses (Skeleton, Progress, Toast/Sonner).
+- [x] Redirect ke `/analyses/[id]` setelah analisis selesai.
 
 **Selesai bila:** admin unggah dataset → (via mock atau Flask asli) lihat hasil tersimpan di Supabase → diarahkan ke halaman hasil, alur ≤ 4 langkah (§13). Menukar mock ke Flask asli hanya perlu ganti `ML_SERVICE_URL`.
 

@@ -31,7 +31,11 @@ export const config = {
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico (favicon file)
+     * - api (route handlers — these are not pages, so they should not be
+     *   redirected to /login; server-to-server calls like the ML client
+     *   fetching the mock ML routes don't carry the browser's session
+     *   cookies. Route handlers that need auth should check it themselves.)
      */
-    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|api|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 }
