@@ -1,0 +1,21 @@
+id_peserta,nama_peserta,kelas,soal_1,soal_2,soal_3,soal_4,soal_5,soal_6,soal_7,soal_8,soal_9,soal_10,skor,total_jawaban_benar,posisi_tempat_duduk
+P-001,Bayu Firmansyah,XI-IPS-1,A,C,C,D,A,B,C,D,B,B,80,8,A1
+P-002,Citra Dewanti,XI-IPS-2,C,C,B,D,A,B,A,A,A,B,70,7,B2
+P-003,Galih Pratama,XI-IPS-1,A,C,A,C,A,D,C,D,A,B,70,7,C3
+P-004,Hesti Kusuma,XI-IPS-2,A,C,B,D,B,B,C,C,B,B,70,7,D4
+P-005,Irwan Setiadi,XI-IPS-1,A,C,B,D,A,B,C,D,A,C,90,9,A5
+P-006,Jasmine Aulia,XI-IPS-2,A,C,B,D,C,D,C,A,A,B,70,7,B1
+P-007,Krisna Wibawa,XI-IPS-1,C,D,B,B,A,C,C,D,A,B,60,6,C2
+P-008,Laila Nuraini,XI-IPS-2,D,C,B,D,A,D,C,C,C,A,50,5,D3
+P-009,Miko Ardiansyah,XI-IPS-1,B,B,B,B,C,C,C,C,A,A,30,3,B3
+P-010,Nurul Fadila,XI-IPS-2,B,B,B,B,C,C,C,C,A,A,30,3,B4
+P-011,Oki Setiawan,XI-IPS-1,C,C,B,D,A,D,C,C,D,B,60,6,C1
+P-012,Puji Astuti,XI-IPS-2,A,C,D,D,A,B,C,D,A,B,90,9,D2
+P-013,Qonita Zahra,XI-IPS-1,A,C,B,D,A,B,D,D,A,B,90,9,A3
+P-014,Reza Aditya,XI-IPS-2,A,B,B,C,C,B,C,D,A,A,60,6,B4
+P-015,Sinta Melati,XI-IPS-1,A,D,B,D,B,B,C,B,C,B,60,6,C5
+P-016,Taufik Hidayat,XI-IPS-2,A,C,B,C,D,B,C,D,A,A,70,7,D1
+P-017,Umi Kalsum,XI-IPS-1,B,C,B,D,A,C,B,D,A,D,60,6,A2
+P-018,Vino Anggara,XI-IPS-2,D,A,B,D,A,D,C,C,A,B,60,6,B3
+P-019,Wulan Sari,XI-IPS-1,B,C,B,D,A,D,C,D,A,B,80,8,C4
+P-020,Yoga Pranata,XI-IPS-2,A,D,B,B,A,C,B,D,A,B,60,6,D5

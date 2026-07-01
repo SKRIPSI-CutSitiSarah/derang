@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useActionState } from "react"
+import { useActionState, startTransition } from "react"
 import { toast } from "sonner"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -40,7 +40,9 @@ export default function NewAnalysisPage() {
     const formData = new FormData()
     formData.append("file", selected)
     formData.append("exam_type", examType)
-    dispatchValidate(formData)
+    startTransition(() => {
+      dispatchValidate(formData)
+    })
   }
 
   const handleClearFile = () => {
@@ -52,7 +54,9 @@ export default function NewAnalysisPage() {
     const formData = new FormData()
     formData.append("file", file)
     formData.append("exam_type", examType)
-    dispatchRun(formData)
+    startTransition(() => {
+      dispatchRun(formData)
+    })
   }
 
   const canRun = file !== null && validateState.status === "valid" && !isRunning

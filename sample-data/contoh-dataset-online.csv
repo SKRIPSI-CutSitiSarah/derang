@@ -1,0 +1,26 @@
+id_peserta,nama_peserta,kelas,soal_1,soal_2,soal_3,soal_4,soal_5,soal_6,soal_7,soal_8,soal_9,soal_10,skor,total_jawaban_benar,durasi_ujian
+P-001,Budi Santoso,XII-IPA-1,A,C,C,D,A,B,C,B,A,C,70,7,1453
+P-002,Siti Aminah,XII-IPA-2,A,C,C,D,A,A,C,D,A,B,80,8,1234
+P-003,Andi Wijaya,XII-IPA-1,C,C,B,B,B,B,C,D,A,B,70,7,1341
+P-004,Rina Kartika,XII-IPA-2,A,C,B,D,A,B,C,D,A,C,90,9,2148
+P-005,Dewi Lestari,XII-IPA-1,A,B,A,D,A,B,C,D,A,D,70,7,1401
+P-006,Agus Salim,XII-IPA-2,A,C,A,C,B,B,C,D,A,B,70,7,1710
+P-007,Rani Puspita,XII-IPA-1,C,D,B,D,A,B,B,D,A,B,70,7,2380
+P-008,Fajar Nugraha,XII-IPA-2,A,A,C,D,A,B,B,D,A,B,70,7,2326
+P-009,Maya Sari,XII-IPA-1,A,C,B,D,C,D,C,D,A,B,80,8,985
+P-010,Yusuf Hidayat,XII-IPA-2,C,C,B,D,A,B,C,A,A,B,80,8,1427
+P-011,Tri Wahyuni,XII-IPA-1,A,C,B,B,A,B,C,D,A,B,90,9,1324
+P-012,Bagus Setiawan,XII-IPA-2,A,C,B,A,A,B,C,D,A,B,90,9,1274
+P-013,Nadia Putri,XII-IPA-1,A,A,A,A,B,B,B,B,C,C,20,2,1767
+P-014,Rizky Ramadhan,XII-IPA-2,A,A,A,A,B,B,B,B,C,C,20,2,1584
+P-015,Lina Marlina,XII-IPA-1,D,B,B,C,D,B,C,D,A,B,60,6,1882
+P-016,Hendra Gunawan,XII-IPA-2,B,D,A,D,A,B,D,D,A,D,50,5,1979
+P-017,Sri Wulandari,XII-IPA-1,A,C,C,D,C,B,A,D,A,B,70,7,2066
+P-018,Doni Kurniawan,XII-IPA-2,D,B,A,D,A,B,C,D,A,D,60,6,2313
+P-019,Indah Permata,XII-IPA-1,A,C,B,D,A,B,C,D,A,B,100,10,1381
+P-020,Wahyu Saputra,XII-IPA-2,A,C,B,D,A,B,C,A,B,B,80,8,1078
+P-021,Fitri Handayani,XII-IPA-1,D,D,C,C,B,B,A,A,D,D,10,1,2379
+P-022,Eko Prasetyo,XII-IPA-2,D,D,C,C,B,B,A,A,D,D,10,1,1002
+P-023,Novi Astuti,XII-IPA-1,A,C,C,D,D,D,C,C,A,B,60,6,1073
+P-024,Adi Suryadi,XII-IPA-2,A,C,C,D,A,B,C,D,C,B,80,8,2600
+P-025,Putri Ayu,XII-IPA-1,B,C,D,C,B,B,C,C,A,D,40,4,2280
