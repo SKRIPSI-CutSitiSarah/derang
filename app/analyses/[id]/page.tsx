@@ -1,29 +1,18 @@
 import { createClient } from "@/lib/supabase/server"
 import { redirect, notFound } from "next/navigation"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { ShieldAlertIcon } from "lucide-react"
+import { SummaryCards } from "@/components/analysis/summary-cards"
+import { CategoryPieChart } from "@/components/analysis/category-pie-chart"
+import { ParticipantsByCategory } from "@/components/analysis/participants-by-category"
+import { SuspiciousPairsTable } from "@/components/analysis/suspicious-pairs-table"
+import { CATEGORIES, type Category } from "@/lib/category"
+import type { ParticipantRow, SimilarityPairRow } from "@/lib/analysis-types"
+import type { ExamType } from "@/lib/ml-client"
 
 export const dynamic = "force-dynamic"
-
-const CATEGORY_LABEL: Record<string, string> = {
-  tidak_terindikasi: "Tidak Terindikasi",
-  terindikasi_rendah: "Terindikasi Rendah",
-  terindikasi_tinggi: "Terindikasi Tinggi",
-}
-
-const CATEGORY_BADGE_CLASS: Record<string, string> = {
-  tidak_terindikasi: "bg-emerald-500/15 text-emerald-700 border-emerald-500/20",
-  terindikasi_rendah: "bg-amber-500/15 text-amber-700 border-amber-500/20",
-  terindikasi_tinggi: "bg-destructive/15 text-destructive border-destructive/20",
-}
 
 export default async function AnalysisResultPage({
   params,
@@ -44,11 +33,18 @@ export default async function AnalysisResultPage({
     notFound()
   }
 
-  const { data: participants } = await supabase
-    .from("participants")
-    .select("*")
-    .eq("analysis_id", id)
-    .order("max_similarity", { ascending: false })
+  const [{ data: participantsData }, { data: pairsData }] = await Promise.all([
+    supabase.from("participants").select("*").eq("analysis_id", id),
+    supabase.from("similarity_pairs").select("*").eq("analysis_id", id),
+  ])
+
+  const participants = (participantsData ?? []) as ParticipantRow[]
+  const pairs = (pairsData ?? []) as SimilarityPairRow[]
+
+  const categoryCounts = CATEGORIES.reduce((acc, category) => {
+    acc[category] = participants.filter((p) => p.category === category).length
+    return acc
+  }, {} as Record<Category, number>)
 
   return (
     <div className="flex flex-col gap-6 p-4 md:p-6 lg:p-8 max-w-5xl mx-auto w-full">
@@ -58,8 +54,7 @@ export default async function AnalysisResultPage({
             {analysis.title || analysis.source_filename || "Hasil Analisis"}
           </h1>
           <p className="text-muted-foreground mt-1 text-sm">
-            Mode: <span className="capitalize">{analysis.exam_type}</span> · Hasil ini adalah{" "}
-            <strong>indikasi awal</strong>, perlu verifikasi manual.
+            Mode: <span className="capitalize">{analysis.exam_type}</span>
           </p>
         </div>
         {analysis.status === "done" && (
@@ -75,71 +70,43 @@ export default async function AnalysisResultPage({
         )}
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-3">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Total Peserta</CardTitle>
-          </CardHeader>
-          <CardContent className="text-2xl font-bold">{analysis.participant_count ?? "-"}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Jumlah Soal</CardTitle>
-          </CardHeader>
-          <CardContent className="text-2xl font-bold">{analysis.question_count ?? "-"}</CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Silhouette Score</CardTitle>
-          </CardHeader>
-          <CardContent className="text-2xl font-bold font-mono">
-            {analysis.silhouette_score !== null ? Number(analysis.silhouette_score).toFixed(4) : "-"}
-          </CardContent>
-        </Card>
-      </div>
+      <Alert>
+        <ShieldAlertIcon />
+        <AlertTitle>Hasil ini adalah indikasi awal</AlertTitle>
+        <AlertDescription>
+          Bukan keputusan final. Keputusan akhir tetap memerlukan pemeriksaan/verifikasi manual oleh pihak
+          berwenang.
+        </AlertDescription>
+      </Alert>
+
+      <SummaryCards
+        participantCount={analysis.participant_count}
+        questionCount={analysis.question_count}
+        silhouetteScore={analysis.silhouette_score}
+        categoryCounts={categoryCounts}
+      />
+
+      <CategoryPieChart categoryCounts={categoryCounts} />
 
       <Card>
         <CardHeader>
-          <CardTitle>Detail Peserta</CardTitle>
+          <CardTitle>Detail Peserta per Kategori</CardTitle>
+          <CardDescription>Daftar peserta beserta skor, kemiripan, dan durasi/posisi.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ParticipantsByCategory participants={participants} examType={analysis.exam_type as ExamType} />
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Pasangan Peserta Mencurigakan</CardTitle>
           <CardDescription>
-            Dashboard, pie chart, dan tabel per kategori akan dilengkapi pada milestone berikutnya.
+            Pasangan dengan kemiripan jawaban tinggi, disertai catatan pendukung.
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {!participants || participants.length === 0 ? (
-            <p className="text-sm text-muted-foreground py-8 text-center">Belum ada data peserta.</p>
-          ) : (
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Kode</TableHead>
-                  <TableHead>Nama</TableHead>
-                  <TableHead>Kelas</TableHead>
-                  <TableHead>Skor</TableHead>
-                  <TableHead>Kemiripan Tertinggi</TableHead>
-                  <TableHead>Kategori</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {participants.map((p) => (
-                  <TableRow key={p.id}>
-                    <TableCell className="font-medium">{p.participant_code}</TableCell>
-                    <TableCell>{p.name}</TableCell>
-                    <TableCell>{p.class}</TableCell>
-                    <TableCell>{p.score}</TableCell>
-                    <TableCell className="font-mono">
-                      {p.max_similarity !== null ? Number(p.max_similarity).toFixed(2) : "-"}
-                    </TableCell>
-                    <TableCell>
-                      <Badge className={CATEGORY_BADGE_CLASS[p.category] ?? ""}>
-                        {CATEGORY_LABEL[p.category] ?? p.category}
-                      </Badge>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          )}
+          <SuspiciousPairsTable pairs={pairs} participants={participants} />
         </CardContent>
       </Card>
     </div>

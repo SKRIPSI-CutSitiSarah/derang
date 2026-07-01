@@ -72,7 +72,7 @@ export default async function DashboardPage() {
               </div>
               <h3 className="font-semibold text-lg">Belum ada analisis</h3>
               <p className="text-muted-foreground text-sm max-w-sm mt-1">
-                Anda belum pernah menjalankan analisis kecurangan. Klik "Analisis Baru" untuk memulai.
+                Anda belum pernah menjalankan analisis kecurangan. Klik &quot;Analisis Baru&quot; untuk memulai.
               </p>
               <Button asChild variant="outline" className="mt-4">
                 <Link href="/analyses/new">Unggah Dataset</Link>

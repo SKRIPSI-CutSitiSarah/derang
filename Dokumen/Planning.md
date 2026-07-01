@@ -51,11 +51,11 @@ Kondisi awal repo: proyek Next.js 15 masih berupa **template dashboard shadcn/ui
 
 **Tujuan:** halaman hasil analisis informatif dan sesuai kebutuhan skripsi.
 
-- [ ] Reuse & sesuaikan `section-cards.tsx` menjadi ringkasan (total peserta, jumlah soal, silhouette score) — F-13.
-- [ ] Reuse `chart-area-interactive.tsx`/Recharts jadi Pie Chart 3 kategori (F-14), warna badge konsisten (hijau/kuning/merah, §12).
-- [ ] Reuse `data-table.tsx` (tanstack table) jadi Tabel Detail per Kategori (F-15): skor, kemiripan, durasi/posisi, dengan Tabs per kategori.
-- [ ] Tabel/Daftar Pasangan Peserta Mencurigakan (F-16): similarity tinggi + catatan pendukung (durasi mirip / posisi berdekatan).
-- [ ] Badge kategori & indikator "hasil = indikasi awal, perlu verifikasi manual" (mitigasi false positive, §15).
+- [x] Ringkasan dashboard (total peserta, jumlah soal, silhouette score, sebaran kategori) — F-13. *(`section-cards.tsx`/`chart-area-interactive.tsx`/`data-table.tsx` template lama dihapus — dummy demo code, sudah tidak dipakai; diganti komponen baru di `components/analysis/` yang memakai primitive shadcn yang sama.)*
+- [x] Pie Chart 3 kategori (F-14) via Recharts, warna badge konsisten (hijau/kuning/merah, §12).
+- [x] Tabel Detail per Kategori (F-15): skor, kemiripan, durasi/posisi, dengan Tabs per kategori.
+- [x] Tabel/Daftar Pasangan Peserta Mencurigakan (F-16): similarity tinggi + catatan pendukung (durasi mirip / posisi berdekatan).
+- [x] Badge kategori & indikator "hasil = indikasi awal, perlu verifikasi manual" (mitigasi false positive, §15).
 
 **Selesai bila:** halaman `/analyses/[id]` menampilkan dashboard, pie chart, tabel kategori, dan pasangan mencurigakan dari data hasil analisis (bukan dummy template).
 
