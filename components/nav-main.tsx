@@ -33,8 +33,8 @@ export function NavMain({
             let isActive: boolean
             if (item.url === "/riwayat") {
               isActive = pathname === "/riwayat" || isResultPage
-            } else if (item.url === "/") {
-              isActive = pathname === "/"
+            } else if (item.url === "/dashboard") {
+              isActive = pathname === "/dashboard"
             } else {
               isActive = pathname.startsWith(item.url)
             }

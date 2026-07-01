@@ -4,20 +4,24 @@ import { updateSession } from '@/lib/supabase/middleware'
 export async function proxy(request: NextRequest) {
   const { supabaseResponse, user } = await updateSession(request)
 
-  const isLoginPage = request.nextUrl.pathname.startsWith('/login')
-  const isRegisterPage = request.nextUrl.pathname.startsWith('/register')
+  const { pathname } = request.nextUrl
+  const isLoginPage = pathname.startsWith('/login')
+  const isRegisterPage = pathname.startsWith('/register')
+  const isLandingPage = pathname === '/'
+  // Public pages accessible without authentication: landing, login, register.
+  const isPublicPage = isLandingPage || isLoginPage || isRegisterPage
 
-  // If user is not authenticated and trying to access any page other than login or register, redirect to login
-  if (!user && !isLoginPage && !isRegisterPage) {
+  // If user is not authenticated and trying to access a protected page, redirect to login
+  if (!user && !isPublicPage) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     return NextResponse.redirect(url)
   }
 
-  // If user is authenticated and trying to access login or register, redirect to dashboard (/)
+  // If user is authenticated and trying to access login or register, redirect to dashboard
   if (user && (isLoginPage || isRegisterPage)) {
     const url = request.nextUrl.clone()
-    url.pathname = '/'
+    url.pathname = '/dashboard'
     return NextResponse.redirect(url)
   }
 

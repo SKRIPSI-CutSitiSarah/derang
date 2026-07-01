@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 import { LayoutDashboardIcon, HistoryIcon, PlusIcon } from "lucide-react"
 
 const SIDE_ITEMS = [
-  { title: "Dashboard", url: "/", icon: LayoutDashboardIcon },
+  { title: "Dashboard", url: "/dashboard", icon: LayoutDashboardIcon },
   { title: "Riwayat", url: "/riwayat", icon: HistoryIcon },
 ]
 
@@ -23,7 +23,7 @@ export function FloatingBottomBar() {
       className="fixed inset-x-0 bottom-4 z-50 flex justify-center px-4 lg:hidden"
     >
       <div className="flex items-center gap-0.5 rounded-full border bg-card/95 p-1 shadow-lg backdrop-blur-md supports-backdrop-filter:bg-card/80">
-        <SideNavLink item={SIDE_ITEMS[0]} isActive={pathname === "/"} />
+        <SideNavLink item={SIDE_ITEMS[0]} isActive={pathname === "/dashboard"} />
 
         <Link
           href={NEW_ANALYSIS_ITEM.url}

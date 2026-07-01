@@ -16,10 +16,10 @@ import {
 } from "@/components/ui/breadcrumb"
 
 function crumbsForPathname(pathname: string): { label: string; href: string }[] {
-  const dashboard = { label: "Dashboard", href: "/" }
+  const dashboard = { label: "Dashboard", href: "/dashboard" }
   const riwayat = { label: "Riwayat Analisis", href: "/riwayat" }
 
-  if (pathname === "/") return [dashboard]
+  if (pathname === "/dashboard") return [dashboard]
   if (pathname === "/riwayat") return [dashboard, riwayat]
   if (pathname === "/analyses/new") return [dashboard, { label: "Analisis Baru", href: pathname }]
   if (pathname.startsWith("/analyses/")) return [dashboard, riwayat, { label: "Hasil Analisis", href: pathname }]

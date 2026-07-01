@@ -34,6 +34,6 @@ export async function deleteAnalysisAction(analysisId: string): Promise<DeleteAn
     return { ok: false, error: "Gagal menghapus analisis." }
   }
 
-  revalidatePath("/")
+  revalidatePath("/dashboard")
   return { ok: true }
 }
