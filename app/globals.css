@@ -130,3 +130,54 @@
     @apply font-sans;
     }
 }
+
+/* MagicUI Custom Animations */
+@keyframes border-beam {
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.05);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-border-beam {
+  animation: border-beam var(--duration, 15s) infinite linear;
+}
+
+.animate-shimmer {
+  background-size: 200% auto;
+  animation: shimmer var(--duration, 3s) infinite linear;
+}
+
+.animate-float {
+  animation: float var(--duration, 6s) ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow var(--duration, 8s) ease-in-out infinite;
+}

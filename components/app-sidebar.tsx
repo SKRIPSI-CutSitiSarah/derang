@@ -28,7 +28,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
     supabase.auth.getUser().then(({ data: { user } }) => {
       if (user) {
         setUser({
-          name: user.email?.split("@")[0] || "Admin",
+          name: user.user_metadata?.name || user.email?.split("@")[0] || "Admin",
           email: user.email || "admin@derang.com",
           avatar: "",
         })
