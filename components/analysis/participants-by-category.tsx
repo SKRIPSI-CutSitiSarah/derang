@@ -23,17 +23,19 @@ export function ParticipantsByCategory({
 }) {
   return (
     <Tabs defaultValue={CATEGORIES[0]}>
-      <TabsList>
-        {CATEGORIES.map((category) => {
-          const count = participants.filter((p) => p.category === category).length
-          return (
-            <TabsTrigger key={category} value={category}>
-              {CATEGORY_LABEL[category]}
-              <Badge variant="secondary">{count}</Badge>
-            </TabsTrigger>
-          )
-        })}
-      </TabsList>
+      <div className="overflow-x-auto">
+        <TabsList>
+          {CATEGORIES.map((category) => {
+            const count = participants.filter((p) => p.category === category).length
+            return (
+              <TabsTrigger key={category} value={category} className="whitespace-nowrap">
+                {CATEGORY_LABEL[category]}
+                <Badge variant="secondary">{count}</Badge>
+              </TabsTrigger>
+            )
+          })}
+        </TabsList>
+      </div>
       {CATEGORIES.map((category) => {
         const members = participants
           .filter((p) => p.category === category)

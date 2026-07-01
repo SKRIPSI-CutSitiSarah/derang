@@ -53,11 +53,11 @@ export function DatasetDropzone({
 
   if (file) {
     return (
-      <div className="flex items-center justify-between rounded-lg border border-border bg-muted/40 p-4">
-        <div className="flex items-center gap-3">
-          <FileSpreadsheetIcon className="h-8 w-8 text-primary" />
-          <div>
-            <p className="text-sm font-medium">{file.name}</p>
+      <div className="flex items-center justify-between gap-3 rounded-lg border border-border bg-muted/40 p-4">
+        <div className="flex min-w-0 items-center gap-3">
+          <FileSpreadsheetIcon className="h-8 w-8 shrink-0 text-primary" />
+          <div className="min-w-0">
+            <p className="truncate text-sm font-medium">{file.name}</p>
             <p className="text-xs text-muted-foreground">{formatBytes(file.size)}</p>
           </div>
         </div>
@@ -68,6 +68,7 @@ export function DatasetDropzone({
           disabled={disabled}
           onClick={onClear}
           aria-label="Hapus file"
+          className="shrink-0"
         >
           <XIcon className="h-4 w-4" />
         </Button>

@@ -2,11 +2,9 @@ import { createClient } from "@/lib/supabase/server"
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { PlusIcon } from "lucide-react"
+import { PlusIcon, HistoryIcon } from "lucide-react"
 import { OverviewCards } from "@/components/dashboard/overview-cards"
 import { AnalysesTrendChart } from "@/components/dashboard/analyses-trend-chart"
-import { AnalysesTable } from "@/components/dashboard/analyses-table"
 import { CategoryPieChart } from "@/components/analysis/category-pie-chart"
 import { CATEGORIES, type Category } from "@/lib/category"
 import type { AnalysisRow } from "@/lib/analysis-types"
@@ -71,12 +69,20 @@ export default async function DashboardPage() {
             Selamat datang, admin. Deteksi kecurangan ujian dengan algoritma K-Means Clustering.
           </p>
         </div>
-        <Button asChild className="shadow-md hover:shadow-lg transition-all duration-300">
-          <Link href="/analyses/new" className="flex items-center gap-2">
-            <PlusIcon className="h-4 w-4" />
-            Analisis Baru
-          </Link>
-        </Button>
+        <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto">
+          <Button asChild variant="outline">
+            <Link href="/riwayat" className="flex items-center gap-2">
+              <HistoryIcon className="h-4 w-4" />
+              Riwayat Analisis
+            </Link>
+          </Button>
+          <Button asChild className="shadow-md hover:shadow-lg transition-all duration-300">
+            <Link href="/analyses/new" className="flex items-center gap-2">
+              <PlusIcon className="h-4 w-4" />
+              Analisis Baru
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <OverviewCards
@@ -93,16 +99,6 @@ export default async function DashboardPage() {
         </div>
         <CategoryPieChart categoryCounts={categoryCounts} />
       </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Riwayat Analisis</CardTitle>
-          <CardDescription>Daftar semua analisis kecurangan ujian yang telah dijalankan.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <AnalysesTable analyses={analyses} />
-        </CardContent>
-      </Card>
     </div>
   )
 }

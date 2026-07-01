@@ -14,7 +14,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { LayoutDashboardIcon, PlusIcon, ShieldAlertIcon } from "lucide-react"
+import { LayoutDashboardIcon, HistoryIcon, PlusIcon, ShieldAlertIcon } from "lucide-react"
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [user, setUser] = React.useState<{ name: string; email: string; avatar: string }>({
@@ -38,9 +38,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   const navItems = [
     {
-      title: "Dashboard/Riwayat",
+      title: "Dashboard",
       url: "/",
       icon: <LayoutDashboardIcon />,
+    },
+    {
+      title: "Riwayat Analisis",
+      url: "/riwayat",
+      icon: <HistoryIcon />,
     },
     {
       title: "Analisis Baru",

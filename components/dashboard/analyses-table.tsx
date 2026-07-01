@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -34,6 +35,7 @@ const STATUS_BADGE: Record<AnalysisRow["status"], { label: string; className: st
 }
 
 export function AnalysesTable({ analyses }: { analyses: AnalysisRow[] }) {
+  const router = useRouter()
   const [search, setSearch] = React.useState("")
   const [statusFilter, setStatusFilter] = React.useState<string>("all")
   const [examTypeFilter, setExamTypeFilter] = React.useState<string>("all")
@@ -109,6 +111,7 @@ export function AnalysesTable({ analyses }: { analyses: AnalysisRow[] }) {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="w-12">No</TableHead>
                 <TableHead>Nama Analisis / File</TableHead>
                 <TableHead>Tipe Ujian</TableHead>
                 <TableHead>Jumlah Peserta</TableHead>
@@ -119,15 +122,18 @@ export function AnalysesTable({ analyses }: { analyses: AnalysisRow[] }) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filtered.map((analysis) => (
-                <TableRow key={analysis.id}>
+              {filtered.map((analysis, index) => (
+                <TableRow
+                  key={analysis.id}
+                  className="cursor-pointer"
+                  onClick={() => router.push(`/analyses/${analysis.id}`)}
+                >
+                  <TableCell className="text-muted-foreground">{index + 1}</TableCell>
                   <TableCell className="font-medium">
-                    <Link href={`/analyses/${analysis.id}`} className="hover:underline block">
-                      <span className="text-foreground">{analysis.title || "Tanpa Judul"}</span>
-                      <span className="block text-xs text-muted-foreground mt-0.5">
-                        {analysis.source_filename}
-                      </span>
-                    </Link>
+                    <span className="text-foreground">{analysis.title || "Tanpa Judul"}</span>
+                    <span className="block text-xs text-muted-foreground mt-0.5">
+                      {analysis.source_filename}
+                    </span>
                   </TableCell>
                   <TableCell className="capitalize">
                     <Badge variant="outline">{analysis.exam_type}</Badge>
@@ -150,11 +156,8 @@ export function AnalysesTable({ analyses }: { analyses: AnalysisRow[] }) {
                       {STATUS_BADGE[analysis.status].label}
                     </Badge>
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell className="text-right" onClick={(e) => e.stopPropagation()}>
                     <div className="flex items-center justify-end gap-2">
-                      <Button asChild variant="ghost" size="sm">
-                        <Link href={`/analyses/${analysis.id}`}>Buka</Link>
-                      </Button>
                       <DeleteAnalysisButton
                         analysisId={analysis.id}
                         label={analysis.title || analysis.source_filename || "Analisis"}
