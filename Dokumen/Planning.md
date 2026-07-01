@@ -14,14 +14,14 @@ Kondisi awal repo: proyek Next.js 15 masih berupa **template dashboard shadcn/ui
 
 **Tujuan:** proyek terhubung ke Supabase, admin bisa login, kerangka halaman sesuai rute PRD siap (menggantikan sisa-sisa template).
 
-- [ ] Setup project Supabase (Auth, Postgres, Storage) — buat satu akun admin.
-- [ ] Install `@supabase/supabase-js` & `@supabase/ssr`; buat `lib/supabase/client.ts` dan `lib/supabase/server.ts`.
-- [ ] Buat skema DB awal (`analyses`, `participants`, `similarity_pairs`) sesuai §10 PRD via migration, aktifkan RLS.
-- [ ] Buat bucket Storage privat `datasets`.
-- [ ] Halaman `/login` (F-01): form email/password pakai shadcn `Card`, `Input`, `Button`, `Form` — ganti placeholder auth template (jika ada) dengan Supabase Auth.
-- [ ] Middleware proteksi rute (redirect ke `/login` jika belum autentikasi) + tombol Logout (F-02).
-- [ ] Bersihkan template: hapus data dummy `app/dashboard/data.json` dan konten contoh di `section-cards.tsx`, `chart-area-interactive.tsx`, `data-table.tsx`; sesuaikan `app-sidebar.tsx` & `nav-*.tsx` supaya menu mengarah ke rute ExamGuard (`/`, `/analyses/new`, `/analyses/[id]`) bukan menu template.
-- [ ] Susun ulang routing: `/` = Dashboard/Riwayat, `/analyses/new` = Analisis Baru, `/analyses/[id]` = Hasil Analisis (§12 PRD).
+- [x] Setup project Supabase (Auth, Postgres, Storage) — buat satu akun admin.
+- [x] Install `@supabase/supabase-js` & `@supabase/ssr`; buat `lib/supabase/client.ts` dan `lib/supabase/server.ts`.
+- [x] Buat skema DB awal (`analyses`, `participants`, `similarity_pairs`) sesuai §10 PRD via migration, aktifkan RLS.
+- [x] Buat bucket Storage privat `datasets`.
+- [x] Halaman `/login` (F-01): form email/password pakai shadcn `Card`, `Input`, `Button`, `Form` — ganti placeholder auth template (jika ada) dengan Supabase Auth.
+- [x] Middleware proteksi rute (redirect ke `/login` jika belum autentikasi) + tombol Logout (F-02).
+- [x] Bersihkan template: hapus data dummy `app/dashboard/data.json` dan konten contoh di `section-cards.tsx`, `chart-area-interactive.tsx`, `data-table.tsx`; sesuaikan `app-sidebar.tsx` & `nav-*.tsx` supaya menu mengarah ke rute ExamGuard (`/`, `/analyses/new`, `/analyses/[id]`) bukan menu template.
+- [x] Susun ulang routing: `/` = Dashboard/Riwayat, `/analyses/new` = Analisis Baru, `/analyses/[id]` = Hasil Analisis (§12 PRD).
 
 **Selesai bila:** admin bisa login/logout, sidebar & layout sudah bertema ExamGuard (bukan template), rute kosong sudah ter-scaffold, skema DB ada di Supabase.
 
