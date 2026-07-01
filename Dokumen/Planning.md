@@ -65,10 +65,10 @@ Kondisi awal repo: proyek Next.js 15 masih berupa **template dashboard shadcn/ui
 
 **Tujuan:** hasil analisis persisten dan bisa diarsipkan/diaudit.
 
-- [ ] Halaman `/` (Dashboard/Riwayat, F-17, F-18): daftar analisis lampau (Table + Badge status), buka kembali tanpa proses ulang.
-- [ ] Hapus riwayat (F-19) dengan konfirmasi (cascade delete participants & similarity_pairs).
-- [ ] Unduh laporan CSV (F-20): peserta + kategori + skor.
-- [ ] (P2, opsional) Unduh laporan PDF (F-21).
+- [x] Halaman `/` (Dashboard/Riwayat, F-17, F-18): daftar analisis lampau (Table + Badge status), buka kembali tanpa proses ulang. *(sudah ada dari M1/M2, tanpa perubahan.)*
+- [x] Hapus riwayat (F-19) dengan konfirmasi (cascade delete participants & similarity_pairs via FK `on delete cascade`).
+- [x] Unduh laporan CSV (F-20): peserta + kategori + skor.
+- [ ] (P2, opsional) Unduh laporan PDF (F-21). *(digeser, opsional sesuai catatan lintas milestone.)*
 
 **Selesai bila:** admin bisa melihat daftar semua analisis, membuka salah satu tanpa re-run, menghapusnya, dan mengekspor CSV.
 

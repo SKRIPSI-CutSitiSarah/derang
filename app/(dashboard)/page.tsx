@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { PlusIcon, FileSpreadsheetIcon } from "lucide-react"
+import { DeleteAnalysisButton } from "@/components/analysis/delete-analysis-button"
 
 export const dynamic = "force-dynamic"
 
@@ -139,6 +140,10 @@ export default async function DashboardPage() {
                           <Button asChild variant="ghost" size="sm">
                             <Link href={`/analyses/${analysis.id}`}>Buka</Link>
                           </Button>
+                          <DeleteAnalysisButton
+                            analysisId={analysis.id}
+                            label={analysis.title || analysis.source_filename || "Analisis"}
+                          />
                         </div>
                       </td>
                     </tr>

@@ -8,6 +8,7 @@ import { SummaryCards } from "@/components/analysis/summary-cards"
 import { CategoryPieChart } from "@/components/analysis/category-pie-chart"
 import { ParticipantsByCategory } from "@/components/analysis/participants-by-category"
 import { SuspiciousPairsTable } from "@/components/analysis/suspicious-pairs-table"
+import { ExportCsvButton } from "@/components/analysis/export-csv-button"
 import { CATEGORIES, type Category } from "@/lib/category"
 import type { ParticipantRow, SimilarityPairRow } from "@/lib/analysis-types"
 import type { ExamType } from "@/lib/ml-client"
@@ -68,6 +69,11 @@ export default async function AnalysisResultPage({
         {analysis.status === "failed" && (
           <Badge className="bg-destructive/15 text-destructive border-destructive/20">Gagal</Badge>
         )}
+        <ExportCsvButton
+          participants={participants}
+          examType={analysis.exam_type as ExamType}
+          filename={`${analysis.title || analysis.source_filename || "analisis"}-hasil.csv`}
+        />
       </div>
 
       <Alert>
